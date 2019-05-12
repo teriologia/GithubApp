@@ -6,7 +6,7 @@ import { Home } from '../screens'
 
 const RouterComponent = () => {
     return (
-        <Router navigationBarStyle={styles.navBarStyle}>
+        <Router>
                 <Stack key='main' headerTintColor="#c7c7c7">
                     <Scene
                         key='Home'
