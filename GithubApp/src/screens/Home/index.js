@@ -22,7 +22,6 @@ class Home extends Component {
   }
 
   render() {
-      console.log(this.props.data)
     return (
     <SafeAreaView>
         <ImageBackground source={Bg} style={styles.background}>

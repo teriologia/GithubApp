@@ -1,4 +1,5 @@
 import {INPUTCHANGED, SEARCHİNGUSER, SEARCHİNGUSERSUCCESS, SEARCHİNGUSERFAIL} from './types'
+import {Actions} from 'react-native-router-flux'
 
 export const searchAction = (text) =>{
     return{
@@ -25,6 +26,7 @@ export const searchUser = (userName) => {
 
 const searchUserSuccess = (dispatch, data) => {
     dispatch({ type: SEARCHİNGUSERSUCCESS, payload: data})
+    Actions.User({ data: data })
 }
 const searchUserFail = (dispatch) => {
     dispatch({type: SEARCHİNGUSERFAIL})
