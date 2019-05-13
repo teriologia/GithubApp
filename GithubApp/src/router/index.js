@@ -7,8 +7,9 @@ import { Home } from '../screens'
 const RouterComponent = () => {
     return (
         <Router>
-                <Stack key='main' headerTintColor="#c7c7c7">
+                <Stack key='main' hideNavBar>
                     <Scene
+
                         key='Home'
                         component={Home}
                         renderLeftButton={<View />}
