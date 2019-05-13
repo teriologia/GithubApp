@@ -49,6 +49,11 @@ export default StyleSheet.create({
     },
     location:{
         marginTop: 10,
+    },
+    repoView:{
+        flex: 1, 
+        alignItems: 'center', 
+        marginTop: 10,
     }
 
 })

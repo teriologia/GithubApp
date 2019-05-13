@@ -1,4 +1,11 @@
-import {INPUTCHANGED, SEARCHİNGUSER, SEARCHİNGUSERSUCCESS, SEARCHİNGUSERFAIL} from './types'
+import { 
+    INPUTCHANGED,
+    SEARCHİNGUSER,
+    SEARCHİNGUSERSUCCESS,
+    SEARCHİNGUSERFAIL,
+    GETREPO, REPOSUCCESS,
+    REPOCOMMIT,
+    REPOCOMMITSUCCESS} from './types'
 import {Actions} from 'react-native-router-flux'
 
 export const searchAction = (text) =>{
@@ -22,6 +29,45 @@ export const searchUser = (userName) => {
         })
         .catch(searchUserFail(dispatch))
     }
+}
+
+export const getRepos = (url) => {
+
+    return (dispatch) => {
+        dispatch({ type: GETREPO })
+
+        fetch(url, {
+        })
+        .then((res) => res.json())
+        .then((resJson) => {
+            getRepoSucces(dispatch, resJson)
+        })
+        .catch(searchUserFail(dispatch))
+    }
+}
+
+export const getRepoCommit = (owner, name) => {
+    return (dispatch) =>{
+        dispatch({type: REPOCOMMIT})
+
+        fetch(`https://api.github.com/repos/${owner}/${name}/commits`, {
+
+        })
+        .then(res=>res.json())
+        .then((resJson) => {
+            getRepoCommitSuccess(resJson)
+            console.log(resJson)
+        })
+        .catch(err => console.log(err))
+    }
+}
+
+const getRepoCommitSuccess = (dispatch, data) => {
+    dispatch({type: REPOCOMMITSUCCESS, payload: data})
+}
+
+const getRepoSucces = (dispatch, data) => {
+    dispatch({ type: REPOSUCCESS, payload: data})
 }
 
 const searchUserSuccess = (dispatch, data) => {

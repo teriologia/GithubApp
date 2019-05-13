@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import styles from './styles'
-import { View, Text, SafeAreaView, Image } from 'react-native';
+import { View, Text, SafeAreaView, Image, FlatList } from 'react-native';
+import { connect } from 'react-redux'
+import { RepoCard } from '../../components'
+import { getRepos } from '../../store/actions'
+import { Actions } from 'react-native-router-flux'
 
 class User extends Component {
   constructor(props) {
@@ -9,10 +13,21 @@ class User extends Component {
     };
   }
 
+  renderItem({item}){
+    const created = item.created_at.substring(0, 10)
+    return(
+      <RepoCard onPress={() => Actions.RepoDetail({ Owner: item.owner.login, RepoName: item.name, url: item.commits_url })} names={item.name} language={item.language} created_at={created} />
+    )
+  }
+
+  componentWillMount(){
+    this.props.getRepos(this.props.data.repos_url)
+  }
+
   render() {
-    console.log(this.props.data)
+    console.log(this.props.repos)
     return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex:1}}>
         <View style={styles.mainView}>
           <View style={{flexDirection: 'row'}}>
             <Image source={{ uri: this.props.data.avatar_url}} style={styles.avatar} />
@@ -37,9 +52,21 @@ class User extends Component {
               </View>
               </View>
         </View>
+        <View style={styles.repoView}>
+          <FlatList 
+          data={this.props.repos}
+          renderItem={this.renderItem}
+          />
+          
+        </View>
     </SafeAreaView>
     );
   }
 }
 
-export default User;
+const MapStateToProps = (state) => {
+  const {repos} = state.data
+  return{repos}
+}
+
+export default connect(MapStateToProps, { getRepos })(User);

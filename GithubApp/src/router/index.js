@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Scene, Router, Stack, Actions } from 'react-native-router-flux';
-import { Home, User } from '../screens'
+import { Home, User, RepoDetail } from '../screens'
 
 
 const RouterComponent = () => {
@@ -19,6 +19,10 @@ const RouterComponent = () => {
                         key='User'
                         component={User}
                         renderLeftButton={<View />}
+                    />
+                    <Scene
+                    key='RepoDetail'
+                    component={RepoDetail}
                     />
                 </Stack>
         </Router>
