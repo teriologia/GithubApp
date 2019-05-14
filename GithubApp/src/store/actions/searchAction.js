@@ -55,7 +55,7 @@ export const getRepoCommit = (owner, name) => {
         })
         .then(res=>res.json())
         .then((resJson) => {
-            getRepoCommitSuccess(resJson)
+            getRepoCommitSuccess(dispatch,resJson)
             console.log(resJson)
         })
         .catch(err => console.log(err))

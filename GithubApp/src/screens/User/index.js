@@ -16,7 +16,7 @@ class User extends Component {
   renderItem({item}){
     const created = item.created_at.substring(0, 10)
     return(
-      <RepoCard onPress={() => Actions.RepoDetail({ Owner: item.owner.login, RepoName: item.name, url: item.commits_url })} names={item.name} language={item.language} created_at={created} />
+      <RepoCard onPress={() => Actions.RepoDetail({ Owner: item.owner.login, RepoName: item.name })} names={item.name} language={item.language} created_at={created} />
     )
   }
 

@@ -6,7 +6,7 @@ function RepoCard(props) {
   const { names, language, created_at, onPress } = props
     return (
   <SafeAreaView>
-      <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity onPress={onPress}>
       <View style={styles.main}>
         <Text style={{color: '#000'}}>{names}</Text>
         <Text>{language}</Text>
