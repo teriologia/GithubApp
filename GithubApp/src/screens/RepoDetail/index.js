@@ -14,7 +14,7 @@ class RepoDetail extends Component {
     }
     renderItem({item}) {
         return(
-            <CommitCard author={item.commit.author.name} name={item.commit.message} />
+            <CommitCard onPress={() => Actions.CommitDetail({ url: item.url})} author={item.commit.author.name} name={item.commit.message} />
         )
     }
 
@@ -24,7 +24,6 @@ class RepoDetail extends Component {
     }
 
     render() {
-        console.log(this.props.commits)
         return (
             <SafeAreaView style={{flex:1}}>
                 <Header onPress={() => Actions.pop()} name={this.props.RepoName} />

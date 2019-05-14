@@ -5,8 +5,11 @@ import {
     SEARCHİNGUSERFAIL,
     GETREPO, REPOSUCCESS,
     REPOCOMMIT,
-    REPOCOMMITSUCCESS} from './types'
+    REPOCOMMITSUCCESS,
+    COMMITDETAIL,
+    FILENAMES} from './types'
 import {Actions} from 'react-native-router-flux'
+import { Base64 } from 'js-base64';
 
 export const searchAction = (text) =>{
     return{
@@ -56,10 +59,26 @@ export const getRepoCommit = (owner, name) => {
         .then(res=>res.json())
         .then((resJson) => {
             getRepoCommitSuccess(dispatch,resJson)
-            console.log(resJson)
         })
         .catch(err => console.log(err))
     }
+}
+
+export const getCommitDetails = (url) =>{
+    return(dispatch) => {
+        dispatch({ type: COMMITDETAIL})
+
+        fetch(url)
+            .then((res) => res.json())
+            .then((resJson) => { 
+                getCommitDetailsSuccess(dispatch, resJson)
+            })
+            .catch(err => console.log(err))
+    }
+}
+
+const getCommitDetailsSuccess = (dispatch, data) =>{
+    dispatch({ type: FILENAMES, payload: data})
 }
 
 const getRepoCommitSuccess = (dispatch, data) => {

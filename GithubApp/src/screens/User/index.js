@@ -25,7 +25,6 @@ class User extends Component {
   }
 
   render() {
-    console.log(this.props.repos)
     return (
     <SafeAreaView style={{flex:1}}>
         <View style={styles.mainView}>

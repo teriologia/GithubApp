@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "eslint-config-rallycoding": "^3.2.0",
+    "js-base64": "^2.5.1",
     "react": "16.8.3",
     "react-native": "0.59.8",
     "react-native-router-flux": "^4.0.6",

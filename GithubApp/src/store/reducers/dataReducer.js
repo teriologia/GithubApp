@@ -1,10 +1,11 @@
-import {INPUTCHANGED, SEARCHİNGUSER, SEARCHİNGUSERFAIL, SEARCHİNGUSERSUCCESS, GETREPO, REPOSUCCESS, REPOCOMMIT, REPOCOMMITSUCCESS} from'../actions/types'
+import {INPUTCHANGED, SEARCHİNGUSER, SEARCHİNGUSERFAIL, SEARCHİNGUSERSUCCESS, GETREPO, REPOSUCCESS, REPOCOMMIT, REPOCOMMITSUCCESS, COMMITDETAIL, FILENAMES} from'../actions/types'
 const INITIAL_STATE = {
     data: '',
     repos: '',
     search: '',
     status: '',
     commits: '',
+    fileNames: '',
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -25,6 +26,10 @@ export default (state = INITIAL_STATE, action) => {
             return{...state, status: 'loading'}
         case REPOCOMMITSUCCESS:
             return{...state, commits: action.payload}
+        case COMMITDETAIL:
+            return{...state, status: 'laoding'}
+        case FILENAMES:
+            return { ...state, fileNames: action.payload}
         default:
             return state;
     }
