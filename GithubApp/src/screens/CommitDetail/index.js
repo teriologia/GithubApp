@@ -17,7 +17,14 @@ class CommitDetail extends Component {
   }
   renderItem = ({item}) => {
       return(
-          <Text>{item.filename}</Text>
+          <View>
+              <View style={{backgroundColor: '#FFF', marginBottom: 10,}}>
+                <Text>{item.filename}</Text>
+              </View>
+              <ScrollView style={{backgroundColor: '#c4c6b1',}}>
+                  <Text>{item.patch}</Text>
+              </ScrollView>
+          </View>
       )
   }
 
