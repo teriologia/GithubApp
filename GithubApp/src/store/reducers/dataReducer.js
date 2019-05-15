@@ -3,7 +3,7 @@ const INITIAL_STATE = {
     data: '',
     repos: '',
     search: '',
-    status: '',
+    spinner: false,
     commits: '',
     fileNames: '',
 };
@@ -13,23 +13,23 @@ export default (state = INITIAL_STATE, action) => {
         case INPUTCHANGED:
             return {...state, search: action.payload}
         case SEARCHİNGUSER:
-            return{...state, status: 'loading'}
+            return { ...state, spinner: true}
         case SEARCHİNGUSERSUCCESS:
-            return {...state, data: action.payload}
+            return { ...state, data: action.payload, spinner: false}
         case SEARCHİNGUSERFAIL:
-            return {...state, status: 'FAIL'}
+            return { ...state, spinner: false, data: 'error'}
         case GETREPO:
-            return{...state, status: 'loading'}
+            return { ...state, spinner: true}
         case REPOSUCCESS:
-            return {...state, repos: action.payload}
+            return { ...state, repos: action.payload, spinner: false}
         case REPOCOMMIT:
-            return{...state, status: 'loading'}
+            return { ...state, spinner: true}
         case REPOCOMMITSUCCESS:
-            return{...state, commits: action.payload}
+            return { ...state, commits: action.payload, spinner: false}
         case COMMITDETAIL:
-            return{...state, status: 'laoding'}
+            return { ...state, spinner: true}
         case FILENAMES:
-            return { ...state, fileNames: action.payload}
+            return { ...state, fileNames: action.payload, spinner: false}
         default:
             return state;
     }

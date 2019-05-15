@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, FlatList } from 'react-native';
+import { TouchableOpacity, View, Text, FlatList, SafeAreaView } from 'react-native';
 import { getCommitDetails } from '../../store/actions';
 import { connect } from 'react-redux'
+import { Spinner } from '../../components'
 import styles from './styles';
 
 
@@ -17,35 +18,37 @@ class CommitDetail extends Component {
   }
   renderItem = ({item}) => {
       return(
-          <View>
-              <View style={{backgroundColor: '#FFF', marginBottom: 10,}}>
-                <Text>{item.filename}</Text>
+          <TouchableOpacity>
+              <View style={styles.fileView}>
+                  <Text style={styles.fileText}><Text style={{color: '#00FF00'}}>FİLE SOURCE: </Text>{item.filename}</Text>
+                  <View style={{width: '100%', alignItems: 'center', justifyContent: 'center',}}>
+                    <Text>Click To Show Codes</Text>
+                  </View>
               </View>
-              <ScrollView style={{backgroundColor: '#c4c6b1',}}>
-                  <Text>{item.patch}</Text>
-              </ScrollView>
-          </View>
+          </TouchableOpacity>
       )
   }
 
   render() {
-    console.log(this.props.fileNames.files)
+    console.log(this.props)
+      if (this.props.spinner === true)
+      {
+          return (<Spinner size='large' />)
+      }
     return (
-    <ScrollView>
-        <View>
+        <SafeAreaView style={styles.main}>
                <FlatList 
                data={this.props.fileNames.files}
                renderItem={this.renderItem}
                />
-        </View>
-    </ScrollView>
+        </SafeAreaView>
     );
   }
 }
 
 const MapStateToProps = (state) => {
-    const { fileNames } = state.data
-    return { fileNames }
+    const { fileNames, spinner } = state.data
+    return { fileNames, spinner }
 }
 
 export default connect(MapStateToProps, {getCommitDetails})(CommitDetail);

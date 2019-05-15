@@ -3,7 +3,7 @@ import { View, SafeAreaView, FlatList } from 'react-native';
 import { connect } from 'react-redux'
 import { Actions } from 'react-native-router-flux'
 import { getRepoCommit } from '../../store/actions'
-import { CommitCard, Header } from '../../components'
+import { CommitCard, Header, Spinner } from '../../components'
 import styles from './styles'
 
 class RepoDetail extends Component {
@@ -24,23 +24,31 @@ class RepoDetail extends Component {
     }
 
     render() {
+        console.log(this.props)
+        if (this.props.spinner === false)
+        {
+            return (
+                <SafeAreaView style={{ flex: 1 }}>
+                    <Header onPress={() => Actions.pop()} name={this.props.RepoName} />
+                    <View style={styles.mainView}>
+                        <FlatList
+                            data={this.props.commits}
+                            renderItem={this.renderItem}
+                        />
+                    </View>
+                </SafeAreaView>
+            )
+        }
+  
         return (
-            <SafeAreaView style={{flex:1}}>
-                <Header onPress={() => Actions.pop()} name={this.props.RepoName} />
-                <View style={styles.mainView}>
-                    <FlatList 
-                    data={this.props.commits}
-                    renderItem={this.renderItem}
-                    />
-                </View>
-            </SafeAreaView>
-        );
+            <Spinner size='large' />
+        )
     }
 }
 
 const MapStateToProps = (state) => {
-    const { commits } = state.data
-    return { commits }
+    const { commits, spinner } = state.data
+    return { commits, spinner }
 }
 
 export default connect(MapStateToProps, { getRepoCommit })(RepoDetail);

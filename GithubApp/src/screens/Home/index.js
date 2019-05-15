@@ -39,8 +39,8 @@ class Home extends Component {
 }
 
 const MapStateToProps = (state) => {
-    const {search, data, status} = state.data
-    return{search, data, status}
+    const { search, data, spinner} = state.data
+    return { search, data, spinner}
 }
 
 export default connect(MapStateToProps, {searchAction, searchUser})(Home);
