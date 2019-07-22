@@ -1,37 +1,44 @@
-import React, { Component, Fragment } from 'react';
-import { TouchableOpacity, View, Text, FlatList, } from 'react-native';
-import { getCommitDetails } from '../../store/actions';
-import { connect } from 'react-redux'
-import { Spinner } from '../../components'
-import styles from './styles';
-
+import React, { Component, Fragment } from "react";
+import { TouchableOpacity, View, Text, FlatList } from "react-native";
+import { getCommitDetails } from "../../store/actions";
+import { connect } from "react-redux";
+import { Spinner } from "../../components";
+import styles from "./styles";
 
 class CommitDetail extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-    };
+    this.state = {};
   }
 
   componentWillMount() {
-    this.props.getCommitDetails(this.props.url)
+    this.props.getCommitDetails(this.props.url);
   }
   renderItem = ({ item }) => {
     return (
       <TouchableOpacity>
         <View style={styles.fileView}>
-          <Text style={styles.fileText}><Text style={{ color: '#00FF00' }}>FİLE SOURCE: </Text>{item.filename}</Text>
-          <View style={{ width: '100%', alignItems: 'center', justifyContent: 'center', }}>
+          <Text style={styles.fileText}>
+            <Text style={{ color: "#00FF00" }}>FİLE SOURCE: </Text>
+            {item.filename}
+          </Text>
+          <View
+            style={{
+              width: "100%",
+              alignItems: "center",
+              justifyContent: "center"
+            }}
+          >
             <Text>Click To Show Codes</Text>
           </View>
         </View>
       </TouchableOpacity>
-    )
-  }
+    );
+  };
 
   render() {
     if (this.props.spinner === true) {
-      return (<Spinner size='large' />)
+      return <Spinner size="large" />;
     }
     return (
       <Fragment>
@@ -45,9 +52,12 @@ class CommitDetail extends Component {
   }
 }
 
-const MapStateToProps = (state) => {
-  const { fileNames, spinner } = state.data
-  return { fileNames, spinner }
-}
+const MapStateToProps = state => {
+  const { fileNames, spinner } = state.data;
+  return { fileNames, spinner };
+};
 
-export default connect(MapStateToProps, { getCommitDetails })(CommitDetail);
+export default connect(
+  MapStateToProps,
+  { getCommitDetails }
+)(CommitDetail);
