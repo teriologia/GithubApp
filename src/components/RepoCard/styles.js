@@ -7,7 +7,7 @@ export default StyleSheet.create({
     paddingVertical: 9,
     justifyContent: "center",
     width: width - 15,
-    backgroundColor: "#d1d1d1",
+    backgroundColor: "#81ecec",
     paddingHorizontal: 10,
     marginBottom: 10,
     borderRadius: 4,

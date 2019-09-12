@@ -13,7 +13,7 @@ function SearchInput(props) {
         placeholder="Search Username"
       />
       <TouchableOpacity onPress={onPress} style={styles.button}>
-        <Text>Search</Text>
+        <Text style={{color: "#FFF"}}>Search User</Text>
       </TouchableOpacity>
     </View>
   );
